@@ -2,25 +2,31 @@ import { Form, Formik, FormikProps } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { ApTextInput } from "../../../components";
+import { useSignUpState } from "./context";
+import { ISignUp } from "./model";
 
 const FormSchema = Yup.object().shape({
   firstName: Yup.string().required("Name is required"),
   lastName: Yup.string().required("Name is required"),
-  phoneNumber: Yup.string().required("Phone Number is required"),
-  atp: Yup.string().required("ATP is required"),
+  email: Yup.string().required("email is required").email(),
+  password: Yup.string().required("password is required"),
 });
 
 export const SignUpPage = () => {
-  const handleSubmit = () => {};
+  const { handleSignUp } = useSignUpState();
+  const handleSubmit = async (values: ISignUp) => {
+    console.log(values);
+    const result = await handleSignUp(values);
+    console.log(result);
+  };
   return (
     <div>
       <Formik
         initialValues={{
           firstName: "",
           lastName: "",
-          phoneNumber: "",
-          atp: "",
-          username: "",
+          email: "",
+          password: "",
         }}
         validationSchema={FormSchema}
         onSubmit={handleSubmit}
@@ -43,10 +49,18 @@ export const SignUpPage = () => {
             />
             <ApTextInput
               className="w-full p-4 mb-2 bg-stone-50 border-none"
-              label="Username"
-              name="username"
-              type="text"
+              label="Email"
+              name="email"
+              type="email"
               placeHolder="Username"
+            />
+
+            <ApTextInput
+              className="w-full p-4 mb-2 bg-stone-50 border-none"
+              label="Password"
+              name="password"
+              type="password"
+              placeHolder="*******"
             />
             <button
               type="submit"
