@@ -2,27 +2,23 @@ import { Form, Formik, FormikProps } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { ApTextInput } from "../../../components";
-import { useSignUpState } from "./context";
-import { ISignUp } from "./model";
+import { useSignInState } from "./context";
+import { ISignIn } from "./model";
 
 const FormSchema = Yup.object().shape({
-  firstName: Yup.string().required("Name is required"),
-  lastName: Yup.string().required("Name is required"),
   email: Yup.string().required("email is required").email(),
   password: Yup.string().required("password is required").min(6),
 });
 
-export const SignUpPage = () => {
-  const { handleSignUp } = useSignUpState();
-  const handleSubmit = async (values: ISignUp) => {
+export const SignInPage = () => {
+  const { handleSignUp } = useSignInState();
+  const handleSubmit = async (values: ISignIn) => {
     await handleSignUp(values);
   };
   return (
     <div>
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
           email: "",
           password: "",
         }}
@@ -31,20 +27,6 @@ export const SignUpPage = () => {
       >
         {(props: FormikProps<any>) => (
           <Form className=" Form card px-4 ">
-            <ApTextInput
-              className="w-full p-4 mb-2 bg-stone-50 border-none"
-              label="First Name"
-              name="firstName"
-              type="text"
-              placeHolder="First Name"
-            />
-            <ApTextInput
-              className="w-full p-4 mb-2 bg-stone-50 border-none"
-              label="Last Name"
-              name="lastName"
-              type="text"
-              placeHolder="Last Name"
-            />
             <ApTextInput
               className="w-full p-4 mb-2 bg-stone-50 border-none"
               label="Email"

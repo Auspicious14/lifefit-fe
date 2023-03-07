@@ -1,19 +1,18 @@
 import React, { createContext, useContext, useState } from "react";
-import { json } from "stream/consumers";
-import { ISignUp } from "./model";
+import { ISignIn } from "./model";
 
-interface ISignUpState {
+interface ISignInState {
   handleSignUp: (user: any) => Promise<void>;
 }
 
-const SignUpContext = React.createContext<ISignUpState>({
+const SignInContext = React.createContext<ISignInState>({
   handleSignUp(user) {
     return null as any;
   },
 });
 
-export const useSignUpState = () => {
-  const context = React.useContext(SignUpContext);
+export const useSignInState = () => {
+  const context = React.useContext(SignInContext);
   if (context === undefined) {
     throw new Error("app dispatch must be used within app global provider");
   }
@@ -24,11 +23,11 @@ export const useSignUpState = () => {
 interface IProps {
   children: React.ReactNode;
 }
-export const SignUpContextProvider: React.FC<IProps> = ({ children }) => {
-  const handleSignUp = async (user: ISignUp) => {
+export const SignInContextProvider: React.FC<IProps> = ({ children }) => {
+  const handleSignUp = async (user: ISignIn) => {
     console.log(JSON.stringify(user));
     try {
-      const res = await fetch("http://localhost:4000/signup", {
+      const res = await fetch("http://localhost:4000/login", {
         method: "POST",
         // mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -41,8 +40,8 @@ export const SignUpContextProvider: React.FC<IProps> = ({ children }) => {
     }
   };
   return (
-    <SignUpContext.Provider value={{ handleSignUp }}>
+    <SignInContext.Provider value={{ handleSignUp }}>
       {children}
-    </SignUpContext.Provider>
+    </SignInContext.Provider>
   );
 };
