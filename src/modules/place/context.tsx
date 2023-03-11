@@ -1,11 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 
 interface IPlaceState {
-  handleSignUp: (user: any) => Promise<void>;
+  handleGetPlaces: (
+    category: any,
+    filter: any,
+    conditions: any
+  ) => Promise<void>;
 }
 
 const PlaceContext = React.createContext<IPlaceState>({
-  handleSignUp(user) {
+  handleGetPlaces(category, filter, conditions) {
     return null as any;
   },
 });
@@ -23,19 +27,11 @@ interface IProps {
   children: React.ReactNode;
 }
 export const PlaceContextProvider: React.FC<IProps> = ({ children }) => {
-  const [category, setCategory] = useState<{ label: string; value: string }>({
-    value: "",
-    label: "",
-  });
-  const [conditions, setConditions] = useState<{
-    label: string;
-    value: string;
-  }>({ value: "", label: "" });
-  const [filter, setFilter] = useState<{ label: string; value: string }>({
-    value: "",
-    label: "",
-  });
-  const handleSignUp = async () => {
+  const handleGetPlaces = async (
+    category: any,
+    filter: any,
+    conditions: any
+  ) => {
     // console.log(JSON.stringify());
     try {
       const res = await fetch(
@@ -51,7 +47,7 @@ export const PlaceContextProvider: React.FC<IProps> = ({ children }) => {
     }
   };
   return (
-    <PlaceContext.Provider value={{ handleSignUp }}>
+    <PlaceContext.Provider value={{ handleGetPlaces }}>
       {children}
     </PlaceContext.Provider>
   );
