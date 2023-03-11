@@ -32,9 +32,18 @@ export const PlacePage = () => {
     <div>
       <Formik
         initialValues={{
-          category: "",
-          filter: "",
-          conditions: "",
+          category: ICategory.map((c, i) => ({
+            label: c.label,
+            value: c.name,
+          })) || [{ label: "", value: "" }],
+          filter: IFilter.map((f, i) => ({
+            label: f.label,
+            value: f.name,
+          })) || [{ label: "", value: "" }],
+          conditions: ICondition.map((c, i) => ({
+            label: c.label,
+            value: c.name,
+          })) || [{ label: "", value: "" }],
         }}
         validationSchema={FormSchema}
         onSubmit={handleSubmit}
