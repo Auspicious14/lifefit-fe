@@ -55,7 +55,7 @@ export const PlacePage = () => {
                 label: f.label,
                 value: f.name,
               }))}
-              name={"category"}
+              name={"filter"}
             />
             <ApSelectInput
               label="condition"
@@ -63,7 +63,7 @@ export const PlacePage = () => {
                 label: con.label,
                 value: con.name,
               }))}
-              name={"category"}
+              name={"condition"}
             />
 
             <button type="submit" className="bg-sky-400 text-white rounded-md">
