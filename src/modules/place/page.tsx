@@ -25,27 +25,40 @@ export const PlacePage = () => {
     label: "",
   });
 
-  const handleSubmit = (values: any) => {
-    handleGetPlaces(values.category, values.filter, values.conditions);
+  const handleSubmit = async (values: any) => {
+    console.log(values.category.value);
+    console.log(values.filter.value);
+    console.log(values.conditions.value);
+    await handleGetPlaces(
+      values.category.value,
+      values.filter.value,
+      values.conditions.value
+    );
   };
   return (
     <div>
       <Formik
         initialValues={{
-          category: ICategory.map((c, i) => ({
-            label: c.label,
-            value: c.name,
-          })) || [{ label: "", value: "" }],
-          filter: IFilter.map((f, i) => ({
-            label: f.label,
-            value: f.name,
-          })) || [{ label: "", value: "" }],
-          conditions: ICondition.map((c, i) => ({
-            label: c.label,
-            value: c.name,
-          })) || [{ label: "", value: "" }],
+          category: ICategory.filter((cc, ii) => cc.label === cc.name).map(
+            (c, i) => ({
+              label: c.label,
+              value: c.name,
+            })
+          ) || [{ label: "", value: "" }],
+          filter: IFilter.filter((ff, ii) => ff.label === ff.name).map(
+            (f, i) => ({
+              label: f.label,
+              value: f.name,
+            })
+          ) || [{ label: "", value: "" }],
+          conditions: ICondition.filter((cc, ii) => cc.label === cc.name).map(
+            (c, i) => ({
+              label: c.label,
+              value: c.name,
+            })
+          ) || [{ label: "", value: "" }],
         }}
-        validationSchema={FormSchema}
+        // validationSchema={FormSchema}
         onSubmit={handleSubmit}
       >
         {(props: FormikProps<any>) => (
@@ -72,12 +85,10 @@ export const PlacePage = () => {
                 label: con.label,
                 value: con.name,
               }))}
-              name={"condition"}
+              name={"conditions"}
             />
 
-            <button type="submit" className="bg-sky-400 text-white rounded-md">
-              Get Place
-            </button>
+            <button type="submit">Submit</button>
           </Form>
         )}
       </Formik>

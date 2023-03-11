@@ -49,13 +49,13 @@ const radius = Math.floor(Math.random() * (number - 100) + 100) + 1;
 
 console.log(radius);
 export const IFilter = [
-  { label: "Abeokuta", name: `7.145244, 3.327695, ${radius}` },
-  { label: "Port Hacourt", name: `4.824167, 7.033611, ${radius}` },
-  { label: "Kano", name: `12.000000, 8.526667, ${radius}` },
-  { label: "Katsina", name: `12.985531, 7.617144, ${radius}` },
-  { label: "Ikeja", name: `6.605874, 3.349149, ${radius}` },
-  { label: "Ughelli", name: `5.500187, 5.5993834, ${radius}` },
-  { label: "Akure", name: `7.250771, 5.210266, ${radius}` },
-  { label: "Calabar", name: `4.982873, 8.334503, ${radius}` },
-  { label: "Jos", name: `9.896527, 8.858331, ${radius}` },
+  { label: "Abeokuta", name: `circle:7.145244,3.327695,${radius}` },
+  { label: "Port Hacourt", name: `circle:4.824167,7.033611,${radius}` },
+  { label: "Kano", name: `circle:12.000000,8.526667,${radius}` },
+  { label: "Katsina", name: `circle:12.985531,7.617144,${radius}` },
+  { label: "Ikeja", name: `circle:6.605874,3.349149,${radius}` },
+  { label: "Ughelli", name: `circle:5.500187,5.5993834,${radius}` },
+  { label: "Akure", name: `circle:7.250771,5.210266,${radius}` },
+  { label: "Calabar", name: `circle:4.982873,8.334503,${radius}` },
+  { label: "Jos", name: `circle:9.896527,8.858331,${radius}` },
 ];

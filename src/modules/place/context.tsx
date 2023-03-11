@@ -35,7 +35,7 @@ export const PlaceContextProvider: React.FC<IProps> = ({ children }) => {
     // console.log(JSON.stringify());
     try {
       const res = await fetch(
-        `http://localhost:4000/places${category}${filter}${conditions}`,
+        `http://localhost:4000/places?categories=${category}&filter=${filter}&conditions=${conditions}`,
         {
           method: "GET",
         }
